@@ -1158,7 +1158,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgThroughput"
-                      stroke="#f97316"
+                      stroke="var(--color-avgThroughput)"
                       strokeWidth={2}
                       name="Avg Throughput (t/hr)"
                       dot={false}
@@ -1166,7 +1166,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgMotorLoad"
-                      stroke="#f03aff"
+                      stroke="var(--color-avgMotorLoad)"
                       strokeWidth={2}
                       name="Avg Motor Load (%)"
                       dot={false}
@@ -1174,7 +1174,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgChainRpm"
-                      stroke="#aab886ff"
+                      stroke="var(--color-avgChainRpm)"
                       strokeWidth={2}
                       name="Avg Chain RPM"
                       dot={false}
@@ -1182,7 +1182,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="runningCount"
-                      stroke="#655e66ff"
+                      stroke="var(--color-runningCount)"
                       strokeWidth={2}
                       name="Running Augers"
                       dot={false}
@@ -1237,7 +1237,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgTemperature"
-                      stroke="#8eab9aff"
+                      stroke="var(--color-avgTemperature)"
                       strokeWidth={2}
                       name="Avg Temperature (°F)"
                       dot={false}
@@ -1245,7 +1245,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgHumidity"
-                      stroke="#928a93ff"
+                      stroke="var(--color-avgHumidity)"
                       strokeWidth={2}
                       name="Avg Humidity (%)"
                       dot={false}
@@ -1253,7 +1253,7 @@ function AnalyticsView({ augers }: { augers: AugerData[] }) {
                     <Line
                       type="monotone"
                       dataKey="avgVibration"
-                      stroke="#f03aff"
+                      stroke="var(--color-avgVibration)"
                       strokeWidth={2}
                       name="Avg Vibration (mm/s)"
                       dot={false}
