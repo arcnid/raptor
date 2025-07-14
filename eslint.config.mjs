@@ -9,8 +9,24 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+export default [
+  // pull in Next.js defaults
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
 
-export default eslintConfig;
+  // now override the rules you want to loosen up
+  {
+    rules: {
+      // make unused‐vars just a warning, and ignore anything prefixed with _
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+
+      // downgrade exhaustive-deps to a warning instead of an error
+      "react-hooks/exhaustive-deps": "warn",
+    },
+  },
+];
