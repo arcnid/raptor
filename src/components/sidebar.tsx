@@ -12,7 +12,6 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-  ChevronRight,
   ChevronLeft,
 } from "lucide-react";
 
@@ -30,11 +29,7 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
       label: "Dashboard",
       href: "/dashboard",
     },
-    {
-      icon: <RotateCw className="w-5 h-5" />,
-      label: "Augers",
-      href: "/dashboard",
-    },
+
     {
       icon: <Wrench className="w-5 h-5" />,
       label: "Maintenance",
@@ -64,63 +59,75 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
 
   return (
     <div
-      className={`bg-slate-800 border-r border-slate-700 h-screen fixed top-0 left-0 transition-all duration-300 flex flex-col z-50 ${
-        collapsed ? "w-20" : "w-64"
-      } ${collapsed ? "md:w-20" : "md:w-64"}`}
+      className={`
+        bg-slate-800 border-r border-slate-700 h-screen fixed top-0 left-0
+        transition-all duration-300 flex flex-col z-50
+        ${collapsed ? "w-20 md:w-20" : "w-64 md:w-64"}
+      `}
     >
-      {/* Logo */}
+      {/* Logo / Toggle */}
       <div className="p-4 border-b border-slate-700 flex items-center justify-between">
-        <Link href="/dashboard" className="flex items-center">
-          <div className="bg-orange-500 text-white w-10 h-10 rounded-md flex items-center justify-center font-bold text-xl">
-            SA
-          </div>
-          {!collapsed && (
-            <div className="ml-3 text-white font-bold text-lg">
-              AugerControl
-            </div>
-          )}
-        </Link>
-        {onToggle && (
-          <Button
-            variant="ghost"
-            size="icon"
+        {collapsed ? (
+          // When collapsed, make the icon itself the toggle button
+          <button
             onClick={onToggle}
-            className="text-slate-400 hover:text-white hover:bg-slate-700"
+            className="flex items-center justify-center w-8 h-8 rounded hover:bg-slate-700"
           >
-            {collapsed ? (
-              <ChevronRight className="w-5 h-5" />
-            ) : (
-              <ChevronLeft className="w-5 h-5" />
+            <img
+              src="/raptor_icon_yellow.svg"
+              alt="Expand sidebar"
+              className="w-8 h-8"
+            />
+          </button>
+        ) : (
+          <>
+            <Link href="/dashboard" className="flex items-center">
+              <img
+                src="/raptor_logo_yellow.svg"
+                alt="Raptor Control System"
+                className="w-15 h-10 object-contain origin-left transform scale-300 origin-center"
+              />
+            </Link>
+            {onToggle && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onToggle}
+                className="text-slate-400 hover:text-white hover:bg-slate-700"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
             )}
-          </Button>
+          </>
         )}
       </div>
 
       {/* Navigation */}
       <div className="flex-1 py-6">
         <ul className="space-y-2">
-          {navItems.map((item, index) => {
+          {navItems.map((item, idx) => {
             const isActive =
               pathname === item.href ||
               (item.href === "/dashboard" && pathname.startsWith("/auger"));
 
             return (
-              <li key={index}>
+              <li key={idx}>
                 <Link
                   href={item.href}
-                  className={`w-full flex items-center px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors ${
-                    isActive
-                      ? "bg-slate-700 text-white border-l-4 border-orange-500"
-                      : ""
-                  }`}
+                  className={`
+                    w-full flex items-center px-4 py-3 text-slate-300
+                    hover:bg-slate-700 hover:text-white transition-colors
+                    ${
+                      isActive
+                        ? "bg-slate-700 text-white border-l-4 border-orange-500"
+                        : ""
+                    }
+                  `}
                 >
                   <div className="flex items-center">
                     {item.icon}
                     {!collapsed && <span className="ml-3">{item.label}</span>}
                   </div>
-                  {!collapsed && isActive && (
-                    <ChevronRight className="w-4 h-4 ml-auto" />
-                  )}
                 </Link>
               </li>
             );
