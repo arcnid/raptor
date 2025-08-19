@@ -73,16 +73,22 @@ export default function AugerDetailPage() {
 
   // connect to MQTT and subscribe for voltage + running state
   useEffect(() => {
-    const client = mqtt.connect("ws://100.86.206.5:9001");
+    const client = mqtt.connect("wss://raptor135593.tailc61a08.ts.net", {
+      path: "/", // Mosquitto WS is at root
+      keepalive: 30,
+      reconnectPeriod: 2000,
+    });
     mqttRef.current = client;
 
     const stateTopic = "raptor/shop/revpi-135593/state";
 
     client.on("connect", () => {
+      console.log("MQTT connected");
       client.subscribe(stateTopic);
     });
 
     client.on("message", (_topic, payload) => {
+      console.log("MQTT message received:", payload.toString());
       try {
         const data = JSON.parse(payload.toString());
         if (typeof data?.voltage === "number") {
