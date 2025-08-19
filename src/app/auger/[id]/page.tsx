@@ -48,6 +48,9 @@ export default function AugerDetailPage() {
   // voltage from MQTT
   const [voltage, setVoltage] = useState<number>(0);
 
+  // keep a ref to the MQTT client so we can publish on button clicks
+  const mqttRef = useRef<mqtt.MqttClient | null>(null);
+
   // continuous angle state + RAF bits (for smooth, no-snap rotation)
   const [angleRaw, setAngleRaw] = useState(0);
   const rafRef = useRef<number | null>(null);
@@ -71,10 +74,12 @@ export default function AugerDetailPage() {
   // connect to MQTT and subscribe for voltage + running state
   useEffect(() => {
     const client = mqtt.connect("ws://100.86.206.5:9001");
-    const topic = "raptor/shop/revpi-135593/state";
+    mqttRef.current = client;
+
+    const stateTopic = "raptor/shop/revpi-135593/state";
 
     client.on("connect", () => {
-      client.subscribe(topic);
+      client.subscribe(stateTopic);
     });
 
     client.on("message", (_topic, payload) => {
@@ -83,7 +88,7 @@ export default function AugerDetailPage() {
         if (typeof data?.voltage === "number") {
           setVoltage(data.voltage);
         }
-        // isRunning = wheels_running && paddle_running
+        // isRunning = wheels_running && paddle_running (derived from state topic)
         if (
           typeof data?.wheels_running === "boolean" &&
           typeof data?.paddle_running === "boolean"
@@ -101,8 +106,23 @@ export default function AugerDetailPage() {
       } catch {
         // ignore teardown errors
       }
+      mqttRef.current = null;
     };
   }, []);
+
+  // helper to publish start/stop commands
+  const publishCmd = (running: boolean) => {
+    const cmdTopic = "raptor/shop/revpi-135593/cmd";
+    const payload = JSON.stringify({
+      wheels_running: running,
+      chain_running: running,
+    });
+    mqttRef.current?.publish(cmdTopic, payload, { qos: 0 }, (err) => {
+      if (err) {
+        console.error("MQTT publish error:", err);
+      }
+    });
+  };
 
   // smooth rotation driven by requestAnimationFrame
   useEffect(() => {
@@ -167,9 +187,13 @@ export default function AugerDetailPage() {
     };
   }, [isRunning, targetThroughput, currentThroughput]);
 
-  // manual buttons still present; MQTT updates will overwrite as new messages arrive
-  const handleStart = () => setIsRunning(true);
-  const handleStop = () => setIsRunning(false);
+  // manual buttons now publish commands (optimistic UI; broker state will overwrite on next message)
+  const handleStart = () => {
+    publishCmd(true);
+  };
+  const handleStop = () => {
+    publishCmd(false);
+  };
 
   const getStatusColor = () => {
     if (!isRunning) return "bg-gray-500";
