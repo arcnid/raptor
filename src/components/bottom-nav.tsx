@@ -56,7 +56,6 @@ export function BottomNav() {
               `}
             >
               <div className="mb-1">{item.icon}</div>
-              <span className="text-xs truncate">{item.label}</span>
             </Link>
           );
         })}
