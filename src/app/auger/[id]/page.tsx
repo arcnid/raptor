@@ -34,7 +34,7 @@ export default function AugerDetailPage() {
 
   const [isRunning, setIsRunning] = useState(false);
   const [augerPosition, setAugerPosition] = useState(0);
-  const [targetThroughput, setTargetThroughput] = useState([75]);
+  const [targetThroughput, setTargetThroughput] = useState([5000]);
   const [currentThroughput, setCurrentThroughput] = useState(0);
   const [temperature, setTemperature] = useState(68.5);
   const [humidity, setHumidity] = useState(45.2);
@@ -252,13 +252,13 @@ export default function AugerDetailPage() {
                   value={targetThroughput}
                   onValueChange={setTargetThroughput}
                   min={0}
-                  max={150}
-                  step={5}
+                  max={10000}
+                  step={50}
                 />
                 <div className="flex justify-between text-xs text-slate-400">
                   <span>0</span>
-                  <span>75</span>
-                  <span>150</span>
+                  <span>5K</span>
+                  <span>10K</span>
                 </div>
               </div>
 
@@ -275,7 +275,7 @@ export default function AugerDetailPage() {
                     style={{
                       width: `${Math.min(
                         100,
-                        (currentThroughput / 150) * 100
+                        (currentThroughput / 10000) * 100
                       )}%`,
                     }}
                   />
@@ -293,7 +293,7 @@ export default function AugerDetailPage() {
                   <div
                     className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                     style={{
-                      width: `${Math.min(100, (chainRpm / 100) * 100)}%`,
+                      width: `${Math.min(100, (chainRpm / 10000) * 100)}%`,
                     }}
                   />
                 </div>
