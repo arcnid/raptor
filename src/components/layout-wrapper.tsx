@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Sidebar } from "./sidebar";
 
@@ -9,15 +8,45 @@ interface LayoutWrapperProps {
   children: React.ReactNode;
 }
 
+const COOKIE_KEY = "sidebar-collapsed";
+const COOKIE_MAX_AGE_DAYS = 180;
+
+function setCookie(name: string, value: string, days: number) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
+}
+function getCookie(name: string) {
+  if (typeof document === "undefined") return null;
+  const pairs = document.cookie.split(";").map((s) => s.trim());
+  for (const p of pairs) {
+    if (p.startsWith(name + "="))
+      return decodeURIComponent(p.slice(name.length + 1));
+  }
+  return null;
+}
+function getInitialCollapsed(): boolean {
+  const v = getCookie(COOKIE_KEY);
+  if (v === "1") return true;
+  if (v === "0") return false;
+  return false;
+}
+
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // Initialize from cookie so it persists across routes/reloads
+  const [sidebarCollapsed, setSidebarCollapsed] =
+    useState<boolean>(getInitialCollapsed);
 
   const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
+    setSidebarCollapsed((prev) => {
+      const next = !prev;
+      setCookie(COOKIE_KEY, next ? "1" : "0", COOKIE_MAX_AGE_DAYS);
+      return next;
+    });
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex">
+    <div className="min-h-screen bg-raptor-dark flex">
       {/* Sidebar */}
       <Sidebar collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
 

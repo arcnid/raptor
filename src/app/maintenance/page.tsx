@@ -62,7 +62,7 @@ export default function MaintenancePage() {
     {
       icon: <FileText className="w-5 h-5" />,
       label: "Logs",
-      color: "bg-slate-600 hover:bg-slate-700",
+      color: "bg-slate-600 hover:bg-raptor-lightgray",
     },
     {
       icon: <Activity className="w-5 h-5" />,
@@ -98,7 +98,7 @@ export default function MaintenancePage() {
           {/* Jog Controls */}
           <div className="space-y-4 sm:space-y-6">
             {/* Tractor Jog */}
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-raptor-gray border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2 text-lg sm:text-xl">
                   <RotateCw className="w-5 h-5" />
@@ -112,7 +112,7 @@ export default function MaintenancePage() {
                     className={`w-full sm:w-auto px-4 sm:px-6 py-3 ${
                       tractorJogState === "reverse"
                         ? "bg-orange-600 hover:bg-orange-700"
-                        : "bg-slate-600 hover:bg-slate-700"
+                        : "bg-slate-600 hover:bg-raptor-lightgray"
                     } text-white`}
                   >
                     <SkipBack className="w-5 h-5 mr-2" />
@@ -130,7 +130,7 @@ export default function MaintenancePage() {
                     className={`w-full sm:w-auto px-4 sm:px-6 py-3 ${
                       tractorJogState === "forward"
                         ? "bg-orange-600 hover:bg-orange-700"
-                        : "bg-slate-600 hover:bg-slate-700"
+                        : "bg-slate-600 hover:bg-raptor-lightgray"
                     } text-white`}
                   >
                     <SkipForward className="w-5 h-5 mr-2" />
@@ -147,7 +147,7 @@ export default function MaintenancePage() {
             </Card>
 
             {/* Train Jog */}
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-raptor-gray border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2 text-lg sm:text-xl">
                   <RotateCw className="w-5 h-5" />
@@ -161,7 +161,7 @@ export default function MaintenancePage() {
                     className={`w-full sm:w-auto px-4 sm:px-6 py-3 ${
                       trainJogState === "reverse"
                         ? "bg-orange-600 hover:bg-orange-700"
-                        : "bg-slate-600 hover:bg-slate-700"
+                        : "bg-slate-600 hover:bg-raptor-lightgray"
                     } text-white`}
                   >
                     <SkipBack className="w-5 h-5 mr-2" />
@@ -179,7 +179,7 @@ export default function MaintenancePage() {
                     className={`w-full sm:w-auto px-4 sm:px-6 py-3 ${
                       trainJogState === "forward"
                         ? "bg-orange-600 hover:bg-orange-700"
-                        : "bg-slate-600 hover:bg-slate-700"
+                        : "bg-slate-600 hover:bg-raptor-lightgray"
                     } text-white`}
                   >
                     <SkipForward className="w-5 h-5 mr-2" />
@@ -199,7 +199,7 @@ export default function MaintenancePage() {
           {/* Isolate Tractor & Quick Actions */}
           <div className="space-y-4 sm:space-y-6">
             {/* Isolate Tractor */}
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-raptor-gray border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Shield className="w-5 h-5" />
@@ -213,7 +213,7 @@ export default function MaintenancePage() {
                     <Switch
                       checked={isolateSwitch1}
                       onCheckedChange={setIsolateSwitch1}
-                      className="data-[state=checked]:bg-orange-500"
+                      className="data-[state=checked]:bg-raptor-yellow"
                     />
                   </div>
                   <div className="flex items-center justify-between">
@@ -221,7 +221,7 @@ export default function MaintenancePage() {
                     <Switch
                       checked={isolateSwitch2}
                       onCheckedChange={setIsolateSwitch2}
-                      className="data-[state=checked]:bg-orange-500"
+                      className="data-[state=checked]:bg-raptor-yellow"
                     />
                   </div>
                   <div className="flex items-center justify-between">
@@ -229,11 +229,11 @@ export default function MaintenancePage() {
                     <Switch
                       checked={isolateSwitch3}
                       onCheckedChange={setIsolateSwitch3}
-                      className="data-[state=checked]:bg-orange-500"
+                      className="data-[state=checked]:bg-raptor-yellow"
                     />
                   </div>
                 </div>
-                <div className="bg-slate-700 rounded-lg p-4">
+                <div className="bg-raptor-lightgray rounded-lg p-4">
                   <div className="text-sm text-slate-400 mb-2">
                     Isolation Status
                   </div>
@@ -247,7 +247,7 @@ export default function MaintenancePage() {
             </Card>
 
             {/* Quick Actions */}
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-raptor-gray border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <RefreshCw className="w-5 h-5" />

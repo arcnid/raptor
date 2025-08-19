@@ -123,7 +123,7 @@ export default function AnalyticsPage() {
             <select
               value={selectedTimeRange}
               onChange={(e) => setSelectedTimeRange(e.target.value)}
-              className="bg-slate-700 border border-slate-600 text-white rounded-md px-3 py-2 text-sm"
+              className="bg-raptor-lightgray border border-slate-600 text-white rounded-md px-3 py-2 text-sm"
             >
               <option value="1h">Last Hour</option>
               <option value="6h">Last 6 Hours</option>
@@ -136,7 +136,7 @@ export default function AnalyticsPage() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-white">
                 {summaryStats.totalAugers}
@@ -146,7 +146,7 @@ export default function AnalyticsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-green-400">
                 {summaryStats.runningAugers}
@@ -154,7 +154,7 @@ export default function AnalyticsPage() {
               <div className="text-xs sm:text-sm text-slate-400">Running</div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-blue-400">
                 {summaryStats.totalThroughput.toFixed(0)}
@@ -164,7 +164,7 @@ export default function AnalyticsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-orange-400">
                 {summaryStats.avgThroughput.toFixed(1)}
@@ -172,7 +172,7 @@ export default function AnalyticsPage() {
               <div className="text-xs sm:text-sm text-slate-400">Avg t/hr</div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-red-400">
                 {summaryStats.avgTemperature.toFixed(1)}°
@@ -180,7 +180,7 @@ export default function AnalyticsPage() {
               <div className="text-xs sm:text-sm text-slate-400">Avg Temp</div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-cyan-400">
                 {summaryStats.avgHumidity.toFixed(1)}%
@@ -190,7 +190,7 @@ export default function AnalyticsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-yellow-400">
                 {summaryStats.alertCount}
@@ -198,7 +198,7 @@ export default function AnalyticsPage() {
               <div className="text-xs sm:text-sm text-slate-400">Alerts</div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardContent className="p-3 sm:p-4">
               <div className="text-xl sm:text-2xl font-bold text-purple-400">
                 {summaryStats.efficiency.toFixed(1)}%
@@ -213,7 +213,7 @@ export default function AnalyticsPage() {
         {/* Main Analytics Charts */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
           {/* Throughput & Performance Metrics */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <BarChart3 className="w-5 h-5" />
@@ -296,7 +296,7 @@ export default function AnalyticsPage() {
           </Card>
 
           {/* Environmental Metrics */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Thermometer className="w-5 h-5" />
@@ -369,7 +369,7 @@ export default function AnalyticsPage() {
 
         {/* Performance Insights */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader className="pb-3">
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-yellow-400" />
@@ -411,7 +411,7 @@ export default function AnalyticsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader className="pb-3">
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-green-400" />
@@ -449,7 +449,7 @@ export default function AnalyticsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader className="pb-3">
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <Activity className="w-5 h-5 text-purple-400" />

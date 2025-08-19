@@ -24,7 +24,7 @@ export default function SplashPage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/splash_texture_widescreen.jpg')",
+          backgroundImage: "url('/raptor_splash_screen_widescreen.jpg')",
         }}
       />
 

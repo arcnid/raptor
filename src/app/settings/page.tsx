@@ -16,13 +16,13 @@ export default function SettingsPage() {
       },
       {
         name: "Card Background",
-        class: "bg-slate-800",
+        class: "bg-raptor-gray",
         hex: "#1e293b",
         rgb: "rgb(30, 41, 59)",
       },
       {
         name: "Secondary Background",
-        class: "bg-slate-700",
+        class: "bg-raptor-lightgray",
         hex: "#334155",
         rgb: "rgb(51, 65, 85)",
       },
@@ -70,7 +70,7 @@ export default function SettingsPage() {
     brand: [
       {
         name: "Primary Orange",
-        class: "bg-orange-500",
+        class: "bg-raptor-yellow",
         hex: "#f97316",
         rgb: "rgb(249, 115, 22)",
       },
@@ -94,7 +94,7 @@ export default function SettingsPage() {
       },
       {
         name: "Orange Border",
-        class: "border-orange-500",
+        class: "border-raptor-yellow",
         hex: "#f97316",
         rgb: "rgb(249, 115, 22)",
       },
@@ -106,12 +106,12 @@ export default function SettingsPage() {
   }: {
     color: { name: string; class: string; hex: string; rgb: string };
   }) => (
-    <div className="bg-slate-700 rounded-lg p-4 space-y-3">
+    <div className="bg-raptor-lightgray rounded-lg p-4 space-y-3">
       <div className="flex items-center justify-between">
         <h4 className="text-white font-medium text-sm">{color.name}</h4>
         <div
           className={`w-8 h-8 rounded-md border-2 border-slate-600 ${
-            color.class.includes("text-") ? "bg-slate-800" : color.class
+            color.class.includes("text-") ? "bg-raptor-gray" : color.class
           }`}
           style={
             color.class.includes("text-") ? { backgroundColor: color.hex } : {}
@@ -121,19 +121,19 @@ export default function SettingsPage() {
       <div className="space-y-1 text-xs">
         <div className="flex justify-between">
           <span className="text-slate-400">Class:</span>
-          <code className="text-slate-300 bg-slate-800 px-2 py-1 rounded">
+          <code className="text-slate-300 bg-raptor-gray px-2 py-1 rounded">
             {color.class}
           </code>
         </div>
         <div className="flex justify-between">
           <span className="text-slate-400">Hex:</span>
-          <code className="text-slate-300 bg-slate-800 px-2 py-1 rounded font-mono">
+          <code className="text-slate-300 bg-raptor-gray px-2 py-1 rounded font-mono">
             {color.hex}
           </code>
         </div>
         <div className="flex justify-between">
           <span className="text-slate-400">RGB:</span>
-          <code className="text-slate-300 bg-slate-800 px-2 py-1 rounded font-mono text-xs">
+          <code className="text-slate-300 bg-raptor-gray px-2 py-1 rounded font-mono text-xs">
             {color.rgb}
           </code>
         </div>
@@ -168,10 +168,10 @@ export default function SettingsPage() {
           </div>
 
           {/* Background Colors */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <div className="w-4 h-4 bg-slate-700 rounded"></div>
+                <div className="w-4 h-4 bg-raptor-lightgray rounded"></div>
                 Background Colors
               </CardTitle>
             </CardHeader>
@@ -185,7 +185,7 @@ export default function SettingsPage() {
           </Card>
 
           {/* Text Colors */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <div className="w-4 h-4 bg-white rounded"></div>
@@ -202,10 +202,10 @@ export default function SettingsPage() {
           </Card>
 
           {/* Brand Colors */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                <div className="w-4 h-4 bg-raptor-yellow rounded"></div>
                 Brand Colors
               </CardTitle>
             </CardHeader>
@@ -219,7 +219,7 @@ export default function SettingsPage() {
           </Card>
 
           {/* Color Usage Guidelines */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-raptor-gray border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <FileText className="w-5 h-5 text-slate-400" />
@@ -240,7 +240,7 @@ export default function SettingsPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-raptor-yellow rounded-full"></div>
                       <span className="text-slate-300">
                         Yellow: Warnings, adjusting states
                       </span>
@@ -263,7 +263,7 @@ export default function SettingsPage() {
                   <h4 className="text-white font-semibold">Brand Usage</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-raptor-yellow rounded-full"></div>
                       <span className="text-slate-300">
                         Orange: Primary brand color, CTAs
                       </span>

@@ -35,7 +35,7 @@ function ListView({ augers }: { augers: AugerData[] }) {
 
   return (
     <div className="space-y-4">
-      <Card className="bg-slate-800 border-slate-700">
+      <Card className="bg-raptor-gray border-slate-700">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -71,7 +71,7 @@ function ListView({ augers }: { augers: AugerData[] }) {
                 {augers.map((auger) => (
                   <tr
                     key={auger.id}
-                    className="border-b border-slate-700 hover:bg-slate-700 cursor-pointer transition-colors"
+                    className="border-b border-slate-700 hover:bg-raptor-lightgray cursor-pointer transition-colors"
                     onClick={() =>
                       (window.location.href = `/auger/${auger.id}`)
                     }
@@ -162,13 +162,13 @@ function MapView({ augers }: { augers: AugerData[] }) {
     const runningCount = augers.filter((a) => a.isRunning).length;
     const percentage = runningCount / augers.length;
     if (percentage >= 0.8) return "bg-green-500";
-    if (percentage >= 0.5) return "bg-yellow-500";
+    if (percentage >= 0.5) return "bg-raptor-yellow";
     return "bg-red-500";
   };
 
   return (
     <div className="space-y-6">
-      <Card className="bg-slate-800 border-slate-700">
+      <Card className="bg-raptor-gray border-slate-700">
         <CardHeader>
           <CardTitle className="text-white">Geographic Distribution</CardTitle>
         </CardHeader>
@@ -225,7 +225,7 @@ function MapView({ augers }: { augers: AugerData[] }) {
                 ></div>
 
                 {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-700 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-raptor-lightgray text-white text-xs rounded px-2 py-1 whitespace-nowrap">
                   <div className="font-semibold">{location.name}</div>
                   <div>{location.augers.length} Augers</div>
                   <div>
@@ -247,7 +247,7 @@ function MapView({ augers }: { augers: AugerData[] }) {
             {locations.map((location) => (
               <Card
                 key={location.name}
-                className="bg-slate-700 border-slate-600"
+                className="bg-raptor-gray border-slate-600"
               >
                 <CardHeader className="pb-3">
                   <CardTitle className="text-white text-lg">
@@ -303,7 +303,7 @@ function MapView({ augers }: { augers: AugerData[] }) {
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-yellow-500"></div>
+              <div className="w-4 h-4 rounded-full bg-raptor-yellow"></div>
               <span className="text-slate-300 text-sm">
                 Medium Performance (50-80% Running)
               </span>
@@ -327,7 +327,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
       case "optimal":
         return "bg-green-500";
       case "warning":
-        return "bg-yellow-500";
+        return "bg-raptor-yellow";
       case "error":
         return "bg-red-500";
       default:
@@ -357,7 +357,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
     <div className="space-y-4 sm:space-y-6">
       {/* Overview Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-        <Card className="bg-slate-800 border-slate-700">
+        <Card className="bg-raptor-gray border-slate-700">
           <CardContent className="p-3 sm:p-4">
             <div className="text-xl sm:text-2xl font-bold text-white">
               {augers.length}
@@ -367,7 +367,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-800 border-slate-700">
+        <Card className="bg-raptor-gray border-slate-700">
           <CardContent className="p-3 sm:p-4">
             <div className="text-xl sm:text-2xl font-bold text-green-400">
               {runningCount}
@@ -375,7 +375,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
             <div className="text-xs sm:text-sm text-slate-400">Running</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-800 border-slate-700">
+        <Card className="bg-raptor-gray border-slate-700">
           <CardContent className="p-3 sm:p-4">
             <div className="text-xl sm:text-2xl font-bold text-yellow-400">
               {warningCount}
@@ -383,7 +383,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
             <div className="text-xs sm:text-sm text-slate-400">Alerts</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-800 border-slate-700">
+        <Card className="bg-raptor-gray border-slate-700">
           <CardContent className="p-3 sm:p-4">
             <div className="text-xl sm:text-2xl font-bold text-slate-300">
               {augers.length - runningCount}
@@ -398,7 +398,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
         {augers.map((auger) => (
           <Card
             key={auger.id}
-            className="bg-slate-800 border-slate-700 hover:bg-slate-750 cursor-pointer transition-colors"
+            className="bg-raptor-gray border-slate-700 hover:bg-slate-750 cursor-pointer transition-colors"
             onClick={() => (window.location.href = `/auger/${auger.id}`)}
           >
             <CardHeader className="pb-3">
@@ -421,7 +421,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
                   <div className="absolute inset-1 rounded-full border-2 border-slate-600 bg-slate-900"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
-                      className="absolute w-0.5 bg-orange-500"
+                      className="absolute w-0.5 bg-raptor-yellow"
                       style={{
                         height: "18px",
                         top: "50%",
@@ -431,7 +431,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
                       }}
                     />
                   </div>
-                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-orange-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
+                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-raptor-yellow rounded-full transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
                 </div>
                 <div className="ml-3 text-center">
                   <div className="text-lg font-mono text-white">
@@ -484,7 +484,10 @@ export default function DashboardPage() {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            <h1
+              className="text-2xl sm:text-3xl font-bold text-white"
+              style={{ color: "#FAD512" }}
+            >
               Raptor Sweep Dashboard
             </h1>
             <p className="text-slate-400 text-sm sm:text-base">
@@ -496,12 +499,12 @@ export default function DashboardPage() {
               onClick={() => setViewMode("grid")}
               className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors relative ${
                 viewMode === "grid"
-                  ? "bg-slate-700 text-white"
-                  : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white"
+                  ? "bg-raptor-lightgray text-white"
+                  : "bg-raptor-gray text-slate-400 hover:bg-raptor-lightgray hover:text-white"
               }`}
             >
               {viewMode === "grid" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-yellow-400 rounded-l-md"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-raptor-yellow rounded-l-md"></div>
               )}
               <Grid3X3 className="w-4 h-4" />
               <span className="hidden sm:inline">Grid</span>
@@ -510,12 +513,12 @@ export default function DashboardPage() {
               onClick={() => setViewMode("list")}
               className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors relative ${
                 viewMode === "list"
-                  ? "bg-slate-700 text-white"
-                  : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white"
+                  ? "bg-raptor-lightgray text-white"
+                  : "bg-raptor-gray text-slate-400 hover:bg-raptor-lightgray hover:text-white"
               }`}
             >
               {viewMode === "list" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-yellow-400 rounded-l-md"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-raptor-yellow rounded-l-md"></div>
               )}
               <List className="w-4 h-4" />
               <span className="hidden sm:inline">List</span>
@@ -524,12 +527,12 @@ export default function DashboardPage() {
               onClick={() => setViewMode("map")}
               className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors relative ${
                 viewMode === "map"
-                  ? "bg-slate-700 text-white"
-                  : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white"
+                  ? "bg-raptor-lightgray text-white"
+                  : "bg-raptor-gray text-slate-400 hover:bg-raptor-lightgray hover:text-white"
               }`}
             >
               {viewMode === "map" && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-yellow-400 rounded-l-md"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-raptor-yellow rounded-l-md"></div>
               )}
               <Map className="w-4 h-4" />
               <span className="hidden sm:inline">Map</span>
