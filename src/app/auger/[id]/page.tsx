@@ -28,6 +28,9 @@ const LayoutWrapper = dynamic(
 );
 import { mockAugerData } from "@/lib/mock-data";
 
+// ⬇️ mqtt over WebSocket
+import mqtt from "mqtt";
+
 export default function AugerDetailPage() {
   // grab the dynamic route param
   const { id } = useParams() as { id: string };
@@ -42,11 +45,14 @@ export default function AugerDetailPage() {
   const [chainRpm, setChainRpm] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // ⬇️ NEW: continuous angle state + RAF bits (for smooth, no-snap rotation)
+  // voltage from MQTT
+  const [voltage, setVoltage] = useState<number>(0);
+
+  // continuous angle state + RAF bits (for smooth, no-snap rotation)
   const [angleRaw, setAngleRaw] = useState(0);
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
-  const SWEEP_RATE_DEG_PER_SEC = 2; // matches the UI label "2.0°/sec" and is much slower than before
+  const SWEEP_RATE_DEG_PER_SEC = 2; // matches UI label
 
   const auger = mockAugerData.find((a) => a.id === id);
 
@@ -62,7 +68,43 @@ export default function AugerDetailPage() {
     }
   }, [auger]);
 
-  // ⬇️ NEW: smooth rotation driven by requestAnimationFrame
+  // connect to MQTT and subscribe for voltage + running state
+  useEffect(() => {
+    const client = mqtt.connect("ws://100.86.206.5:9001");
+    const topic = "raptor/shop/revpi-135593/state";
+
+    client.on("connect", () => {
+      client.subscribe(topic);
+    });
+
+    client.on("message", (_topic, payload) => {
+      try {
+        const data = JSON.parse(payload.toString());
+        if (typeof data?.voltage === "number") {
+          setVoltage(data.voltage);
+        }
+        // isRunning = wheels_running && paddle_running
+        if (
+          typeof data?.wheels_running === "boolean" &&
+          typeof data?.paddle_running === "boolean"
+        ) {
+          setIsRunning(data.wheels_running && data.paddle_running);
+        }
+      } catch {
+        // ignore malformed payloads
+      }
+    });
+
+    return () => {
+      try {
+        client.end(true);
+      } catch {
+        // ignore teardown errors
+      }
+    };
+  }, []);
+
+  // smooth rotation driven by requestAnimationFrame
   useEffect(() => {
     if (!isRunning) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -88,7 +130,7 @@ export default function AugerDetailPage() {
     };
   }, [isRunning]);
 
-  // ⬇️ NEW: keep the displayed augerPosition (0–359) in sync with the continuous angle
+  // keep displayed augerPosition (0–359) in sync with continuous angle
   useEffect(() => {
     const normalized = ((angleRaw % 360) + 360) % 360;
     setAugerPosition(normalized);
@@ -125,6 +167,7 @@ export default function AugerDetailPage() {
     };
   }, [isRunning, targetThroughput, currentThroughput]);
 
+  // manual buttons still present; MQTT updates will overwrite as new messages arrive
   const handleStart = () => setIsRunning(true);
   const handleStop = () => setIsRunning(false);
 
@@ -344,7 +387,7 @@ export default function AugerDetailPage() {
                         height: "102px",
                         top: "50%",
                         left: "50%",
-                        // ⬇️ rotate by continuous angle to avoid snapping at 360→0
+                        // rotate by continuous angle to avoid snapping at 360→0
                         transform: `translate(-50%, -100%) rotate(${angleRaw}deg)`,
                         transformOrigin: "50% 100%",
                       }}
@@ -446,7 +489,7 @@ export default function AugerDetailPage() {
                     <span className="text-slate-300 font-medium">Voltage</span>
                   </div>
                   <div className="text-3xl font-mono text-white">
-                    {isRunning ? "687" : "0"} Volts
+                    {voltage.toFixed(0)} Volts
                   </div>
                 </div>
               </div>
