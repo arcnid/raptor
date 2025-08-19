@@ -71,44 +71,87 @@ export default function AugerDetailPage() {
     }
   }, [auger]);
 
-  // connect to MQTT and subscribe for voltage + running state
+  // connect to MQTT and subscribe for voltage + running state (443 first, then 444 fallback)
   useEffect(() => {
-    const client = mqtt.connect("wss://raptor135593.tailc61a08.ts.net", {
-      path: "/", // Mosquitto WS is at root
-      keepalive: 30,
-      reconnectPeriod: 2000,
-    });
-    mqttRef.current = client;
-
     const stateTopic = "raptor/shop/revpi-135593/state";
+    const urls = [
+      "wss://raptor135593.tailc61a08.ts.net", // 443 → 9001 (Funnel)
+      "wss://raptor135593.tailc61a08.ts.net:444", // 444 → 9001 (Funnel fallback for Pi)
+    ];
 
-    client.on("connect", () => {
-      console.log("MQTT connected");
-      client.subscribe(stateTopic);
-    });
+    let destroyed = false;
+    let client: mqtt.MqttClient | null = null;
 
-    client.on("message", (_topic, payload) => {
-      console.log("MQTT message received:", payload.toString());
-      try {
-        const data = JSON.parse(payload.toString());
-        if (typeof data?.voltage === "number") {
-          setVoltage(data.voltage);
+    const tryConnect = (i: number) => {
+      if (destroyed || i >= urls.length) return;
+
+      const url = urls[i];
+      const c = mqtt.connect(url, {
+        path: "/", // Mosquitto WS is at root
+        keepalive: 30,
+        reconnectPeriod: 2000, // once connected, let MQTT.js handle reconnects to this URL
+        connectTimeout: 4000, // fail fast so we can try the next URL
+      });
+
+      mqttRef.current = c;
+      client = c;
+
+      let connected = false;
+
+      // If we don't connect quickly, end this attempt and try next URL
+      const fallbackTimer = setTimeout(() => {
+        if (!connected) {
+          try {
+            c.end(true);
+          } catch {}
+          tryConnect(i + 1);
         }
-        // isRunning = wheels_running && paddle_running (derived from state topic)
-        if (
-          typeof data?.wheels_running === "boolean" &&
-          typeof data?.paddle_running === "boolean"
-        ) {
-          setIsRunning(data.wheels_running && data.paddle_running);
+      }, 4500);
+
+      c.once("connect", () => {
+        connected = true;
+        clearTimeout(fallbackTimer);
+        console.log("MQTT connected", url);
+        c.subscribe(stateTopic);
+      });
+
+      c.on("message", (_topic, payload) => {
+        console.log("MQTT message received:", payload.toString());
+        try {
+          const data = JSON.parse(payload.toString());
+          if (typeof data?.voltage === "number") {
+            setVoltage(data.voltage);
+          }
+          // isRunning = wheels_running && paddle_running (derived from state topic)
+          if (
+            typeof data?.wheels_running === "boolean" &&
+            typeof data?.paddle_running === "boolean"
+          ) {
+            setIsRunning(data.wheels_running && data.paddle_running);
+          }
+        } catch {
+          // ignore malformed payloads
         }
-      } catch {
-        // ignore malformed payloads
-      }
-    });
+      });
+
+      // If we had a connection and then lost it, re-run the sequence from the top
+      c.on("close", () => {
+        if (!destroyed && connected) {
+          setTimeout(() => tryConnect(0), 1000);
+        }
+      });
+
+      c.on("error", () => {
+        // errors are handled by the fallback timer / close handler
+      });
+    };
+
+    tryConnect(0);
 
     return () => {
+      destroyed = true;
       try {
-        client.end(true);
+        client?.end(true);
       } catch {
         // ignore teardown errors
       }
@@ -286,7 +329,7 @@ export default function AugerDetailPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <Button
                   onClick={handleStart}
                   disabled={isRunning}
@@ -314,10 +357,10 @@ export default function AugerDetailPage() {
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-white font-medium">
+                  <span className="text-white font-medium text-sm sm:text-base">
                     Target Throughput
                   </span>
-                  <span className="text-orange-400 font-mono">
+                  <span className="text-orange-400 font-mono text-sm sm:text-base">
                     {targetThroughput[0]} Bu/hr
                   </span>
                 </div>
@@ -335,10 +378,12 @@ export default function AugerDetailPage() {
                 </div>
               </div>
 
-              <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+              <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-300">Current Throughput</span>
-                  <span className="text-2xl font-mono text-white">
+                  <span className="text-slate-300 text-sm sm:text-base">
+                    Current Throughput
+                  </span>
+                  <span className="text-xl sm:text-2xl font-mono text-white">
                     {currentThroughput.toFixed(1)} Bu/hr
                   </span>
                 </div>
@@ -355,10 +400,12 @@ export default function AugerDetailPage() {
                 </div>
               </div>
 
-              <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+              <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-300">Chain RPM</span>
-                  <span className="text-2xl font-mono text-white">
+                  <span className="text-slate-300 text-sm sm:text-base">
+                    Chain RPM
+                  </span>
+                  <span className="text-xl sm:text-2xl font-mono text-white">
                     {chainRpm.toFixed(0)} RPM
                   </span>
                 </div>
@@ -370,7 +417,7 @@ export default function AugerDetailPage() {
                     }}
                   />
                 </div>
-                <div className="flex justify-between text-xs text-slate-400">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between text-xs text-slate-400">
                   <span>Optimal Range: 40–80 RPM</span>
                   {chainRpm > 80 && (
                     <span className="text-yellow-400 flex items-center gap-1">
@@ -393,7 +440,7 @@ export default function AugerDetailPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col items-center py-6">
-                <div className="relative w-60 h-60 mb-6">
+                <div className="relative w-48 h-48 sm:w-60 sm:h-60 mb-6">
                   <div className="absolute inset-4 rounded-full border-6 border-raptor-yellow bg-raptor-gray" />
                   <div className="absolute inset-0">
                     {/* markers at 0, 90, 180, 270 */}
@@ -417,7 +464,6 @@ export default function AugerDetailPage() {
                         height: "102px",
                         top: "50%",
                         left: "50%",
-                        // rotate by continuous angle to avoid snapping at 360→0
                         transform: `translate(-50%, -100%) rotate(${angleRaw}deg)`,
                         transformOrigin: "50% 100%",
                       }}
@@ -425,11 +471,12 @@ export default function AugerDetailPage() {
                   </div>
                   <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-raptor-yellow rounded-full transform -translate-x-1/2 -translate-y-1/2 border-2 border-raptor-yellow z-10" />
                 </div>
-                <div className="bg-raptor-lightgray rounded-lg px-6 py-4 w-full max-w-xs">
-                  <div className="flex justify-between items-center">
+
+                <div className="bg-raptor-lightgray rounded-lg px-4 py-3 sm:px-6 sm:py-4 w-full max-w-xs">
+                  <div className="flex justify-between items-center gap-4">
                     {/* LEFT: angle + label (centered) */}
                     <div className="text-center">
-                      <div className="text-3xl font-mono font-bold text-white mb-1">
+                      <div className="text-2xl sm:text-3xl font-mono font-bold text-white mb-1">
                         {augerPosition.toFixed(0)}°
                       </div>
                       <div className="text-xs text-slate-400">
@@ -457,22 +504,22 @@ export default function AugerDetailPage() {
           </div>
 
           {/* Environmental Monitoring */}
-          <Card className="bg-raptor-gray border-slate-700 xl:col-span-3">
+          <Card className="bg-raptor-lightgray border-slate-700 xl:col-span-3">
             <CardHeader>
               <CardTitle className="text-white text-lg">
                 Environmental Monitoring
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <Thermometer className="w-6 h-6 text-red-400" />
-                    <span className="text-slate-300 font-medium">
+                    <Thermometer className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />
+                    <span className="text-slate-300 font-medium text-sm sm:text-base">
                       Temperature
                     </span>
                   </div>
-                  <div className="text-3xl font-mono text-white">
+                  <div className="text-2xl sm:text-3xl font-mono text-white">
                     {temperature.toFixed(1)}°F
                   </div>
                   {temperature > 80 && (
@@ -483,12 +530,14 @@ export default function AugerDetailPage() {
                   )}
                 </div>
 
-                <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+                <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <Droplets className="w-6 h-6 text-blue-400" />
-                    <span className="text-slate-300 font-medium">Humidity</span>
+                    <Droplets className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                    <span className="text-slate-300 font-medium text-sm sm:text-base">
+                      Humidity
+                    </span>
                   </div>
-                  <div className="text-3xl font-mono text-white">
+                  <div className="text-2xl sm:text-3xl font-mono text-white">
                     {humidity.toFixed(1)}%
                   </div>
                   {humidity > 60 && (
@@ -499,26 +548,28 @@ export default function AugerDetailPage() {
                   )}
                 </div>
 
-                <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+                <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <Gauge className="w-6 h-6 text-green-400" />
-                    <span className="text-slate-300 font-medium">
+                    <Gauge className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                    <span className="text-slate-300 font-medium text-sm sm:text-base">
                       Motor Load
                     </span>
                   </div>
-                  <div className="text-3xl font-mono text-white">
+                  <div className="text-2xl sm:text-3xl font-mono text-white">
                     {isRunning ? "87.3" : "0.0"}%
                   </div>
                 </div>
 
-                <div className="bg-raptor-lightgray rounded-lg p-4 space-y-2">
+                <div className="bg-raptor-lightgray rounded-lg p-3 sm:p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-white" />
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-400 rounded-full flex items-center justify-center">
+                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
-                    <span className="text-slate-300 font-medium">Voltage</span>
+                    <span className="text-slate-300 font-medium text-sm sm:text-base">
+                      Voltage
+                    </span>
                   </div>
-                  <div className="text-3xl font-mono text-white">
+                  <div className="text-2xl sm:text-3xl font-mono text-white">
                     {voltage.toFixed(0)} Volts
                   </div>
                 </div>

@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Sidebar } from "./sidebar";
+import { BottomNav } from "./bottom-nav";
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -47,19 +48,22 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   return (
     <div className="min-h-screen bg-raptor-dark flex">
-      {/* Sidebar */}
-      <Sidebar collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
+      <div className="hidden md:block">
+        <Sidebar collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
+      </div>
 
       {/* Main Content */}
       <div
-        className={`flex-1 transition-all duration-300 ${
-          sidebarCollapsed ? "ml-20" : "ml-64"
-        } ${sidebarCollapsed ? "md:ml-20" : "md:ml-64"}`}
+        className={`flex-1 transition-all duration-300 ml-0
+          ${sidebarCollapsed ? "md:ml-20" : "md:ml-64"}
+        `}
       >
-        <div className="p-4 sm:p-6 lg:p-8">
+        <div className="p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">
           <div className="max-w-7xl mx-auto">{children}</div>
         </div>
       </div>
+
+      <BottomNav />
     </div>
   );
 }
