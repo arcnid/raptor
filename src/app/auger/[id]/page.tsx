@@ -333,7 +333,7 @@ export default function AugerDetailPage() {
                 <Button
                   onClick={handleStart}
                   disabled={isRunning}
-                  className="flex-1 bg-green-600 hover:bg-green-700 px-8 py-3 text-lg text-white h-10"
+                  className="flex-1 bg-green-600 hover:bg-green-700 px-8 py-3 text-lg text-white h-14"
                 >
                   <Play className="w-5 h-5 mr-2" />
                   START
@@ -341,14 +341,14 @@ export default function AugerDetailPage() {
                 <Button
                   onClick={handleStop}
                   disabled={!isRunning}
-                  className="flex-1 bg-red-600 hover:bg-red-700 px-8 py-3 text-lg text-white h-10"
+                  className="flex-1 bg-red-600 hover:bg-red-700 px-8 py-3 text-lg text-white h-14"
                 >
                   <Square className="w-5 h-5 mr-2" />
                   STOP
                 </Button>
                 <Button
                   onClick={() => setAugerPosition(0)}
-                  className="flex-1 bg-raptor-lightgray hover:bg-blue-300 px-8 py-3 text-lg text-white h-10"
+                  className="flex-1 bg-raptor-lightgray hover:bg-blue-300 px-8 py-3 text-lg text-white h-14"
                 >
                   <RotateCw className="w-5 h-5" />
                   RESET
@@ -504,7 +504,7 @@ export default function AugerDetailPage() {
           </div>
 
           {/* Environmental Monitoring */}
-          <Card className="bg-raptor-lightgray border-slate-700 xl:col-span-3">
+          <Card className="bg-raptor-gray border-slate-700 xl:col-span-3">
             <CardHeader>
               <CardTitle className="text-white text-lg">
                 Environmental Monitoring
