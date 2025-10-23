@@ -24,6 +24,7 @@ export default [
           varsIgnorePattern: "^_",
         },
       ],
+      "react/no-unescaped-entities": "off",
 
       // downgrade exhaustive-deps to a warning instead of an error
       "react-hooks/exhaustive-deps": "warn",
