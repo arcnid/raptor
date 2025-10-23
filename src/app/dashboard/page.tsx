@@ -359,7 +359,7 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         <Card className="bg-raptor-gray border-slate-700">
           <CardContent className="p-3 sm:p-4">
-            <div className="text-xl sm:text-2xl font-bold text-white">
+            <div className="text-xl sm:text-2xl font-bold text-white leading-none">
               {augers.length}
             </div>
             <div className="text-xs sm:text-sm text-slate-400">
@@ -418,12 +418,12 @@ function GridOverview({ augers }: { augers: AugerData[] }) {
               {/* Mini Position Display */}
               <div className="flex items-center justify-start">
                 <div className="relative w-16 h-16">
-                  <div className="absolute inset-1 rounded-full border-2 border-slate-600 bg-slate-900"></div>
+                  <div className="absolute inset-1 rounded-full border-2 border-raptor-yellow bg-raptor-gray"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
                       className="absolute w-0.5 bg-raptor-yellow"
                       style={{
-                        height: "18px",
+                        height: "27px",
                         top: "50%",
                         left: "50%",
                         transform: `translate(-50%, -100%) rotate(${auger.position}deg)`,
