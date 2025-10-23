@@ -459,7 +459,7 @@ function CurrentIssuesTab() {
               <div className="flex justify-between">
                 <span className="text-slate-400">Impact:</span>
                 <span className="text-red-400 font-medium">
-                  15% efficency reduction
+                  15% efficiency reduction
                 </span>
               </div>
             </div>
@@ -503,7 +503,7 @@ function CurrentIssuesTab() {
               <div className="flex justify-between">
                 <span className="text-slate-400">Impact:</span>
                 <span className="text-yellow-400 font-medium">
-                  Minor delay in real-time temperature forcasting
+                  Minor delay in real-time temperature forecasting
                 </span>
               </div>
             </div>
