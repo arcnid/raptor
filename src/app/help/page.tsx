@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { LayoutWrapper } from "@/components/layout-wrapper";
 import {
   ChevronDown,
   ChevronUp,
@@ -22,8 +23,8 @@ export default function HelpPage() {
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="min-h-screen bg-raptor-dark text-white p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <LayoutWrapper>
+      <div className="space-y-4 md:space-y-6 pb-20 md:pb-6">
         {/* Header */}
         <div className="mb-6 md:mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-raptor-yellow mb-2">
@@ -74,7 +75,7 @@ export default function HelpPage() {
           {activeTab === "contact" && <ContactTab />}
         </div>
       </div>
-    </div>
+    </LayoutWrapper>
   );
 }
 
