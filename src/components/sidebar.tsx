@@ -98,6 +98,11 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
       label: "Settings",
       href: "/settings",
     },
+    {
+      icon: <HelpCircle className="w-5 h-5" />,
+      label: "Help",
+      href: "/help",
+    },
   ];
 
   return (

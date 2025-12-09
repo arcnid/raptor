@@ -30,7 +30,7 @@ export default function HelpPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-raptor-yellow mb-2">
             Help Center
           </h1>
-          <p className="text-slate-400 text-sm md:text-base">
+          <p className="text-slate-300 text-sm md:text-base">
             Get help with your grain bin monitoring system
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function HelpPage() {
                 className={`px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all whitespace-nowrap text-sm md:text-base border ${
                   activeTab === tab.id
                     ? "bg-raptor-yellow text-raptor-dark border-raptor-yellow"
-                    : "bg-raptor-gray text-slate-300 hover:bg-raptor-lightgray border-slate-600 hover:border-slate-500"
+                    : "bg-raptor-gray text-slate-200 hover:bg-raptor-lightgray border-slate-600 hover:border-slate-500"
                 }`}
               >
                 {tab.label}
@@ -92,11 +92,11 @@ function OverviewTab({
           <div className="bg-green-500/10 p-2.5 rounded-lg border border-green-500/30">
             <Play className="w-6 h-6 text-green-400" fill="currentColor" />
           </div>
-          <h3 className="text-xl font-bold">Quick Start</h3>
+          <h3 className="text-xl font-bold text-white">Quick Start</h3>
         </div>
         <div className="p-6 flex flex-col flex-1">
           <div className="flex-1 flex items-center justify-center">
-            <p className="text-slate-300 text-base leading-relaxed text-center">
+            <p className="text-slate-200 text-base leading-relaxed text-center">
               New to RAPTOR? Start here for the basics.
             </p>
           </div>
@@ -115,11 +115,11 @@ function OverviewTab({
           <div className="bg-blue-500/10 p-2.5 rounded-lg border border-blue-500/30">
             <HelpCircle className="w-6 h-6 text-blue-400" />
           </div>
-          <h3 className="text-xl font-bold">Common Questions</h3>
+          <h3 className="text-xl font-bold text-white">Common Questions</h3>
         </div>
         <div className="p-6 flex flex-col flex-1">
           <div className="flex-1 flex items-center justify-center">
-            <p className="text-slate-300 text-base leading-relaxed text-center">
+            <p className="text-slate-200 text-base leading-relaxed text-center">
               Find answers to frequently asked questions.
             </p>
           </div>
@@ -138,11 +138,11 @@ function OverviewTab({
           <div className="bg-red-500/10 p-2.5 rounded-lg border border-red-500/30">
             <AlertTriangle className="w-6 h-6 text-red-400" />
           </div>
-          <h3 className="text-xl font-bold">Need Help Now?</h3>
+          <h3 className="text-xl font-bold text-white">Need Help Now?</h3>
         </div>
         <div className="p-6 flex flex-col flex-1">
           <div className="flex-1 flex items-center justify-center">
-            <p className="text-slate-300 text-base leading-relaxed text-center">
+            <p className="text-slate-200 text-base leading-relaxed text-center">
               Troubleshoot issues and get immediate help.
             </p>
           </div>
@@ -161,7 +161,9 @@ function OverviewTab({
 function GettingStartedTab() {
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">Getting Started</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
+        Getting Started
+      </h2>
 
       {/* Step 1 */}
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
@@ -169,9 +171,11 @@ function GettingStartedTab() {
           <div className="bg-raptor-yellow text-raptor-dark rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
             1
           </div>
-          <h3 className="text-lg md:text-xl font-bold">Logging in</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            Logging in
+          </h3>
         </div>
-        <ul className="space-y-2 ml-10 md:ml-14 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 ml-10 md:ml-14 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -199,11 +203,11 @@ function GettingStartedTab() {
           <div className="bg-raptor-yellow text-raptor-dark rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
             2
           </div>
-          <h3 className="text-lg md:text-xl font-bold">
+          <h3 className="text-lg md:text-xl font-bold text-white">
             Navigating the Interface
           </h3>
         </div>
-        <ul className="space-y-2 ml-10 md:ml-14 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 ml-10 md:ml-14 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -236,11 +240,11 @@ function GettingStartedTab() {
           <div className="bg-raptor-yellow text-raptor-dark rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
             3
           </div>
-          <h3 className="text-lg md:text-xl font-bold">
+          <h3 className="text-lg md:text-xl font-bold text-white">
             Understanding Dashboard Metrics
           </h3>
         </div>
-        <ul className="space-y-2 ml-10 md:ml-14 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 ml-10 md:ml-14 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-green-400 font-bold mt-1">•</span>
             <span>
@@ -275,9 +279,11 @@ function GettingStartedTab() {
           <div className="bg-raptor-yellow text-raptor-dark rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
             4
           </div>
-          <h3 className="text-lg md:text-xl font-bold">Setting Up Alerts</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            Setting Up Alerts
+          </h3>
         </div>
-        <ul className="space-y-2 ml-10 md:ml-14 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 ml-10 md:ml-14 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -312,15 +318,19 @@ function GettingStartedTab() {
 function FeatureGuidesTab() {
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">Feature Guides</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
+        Feature Guides
+      </h2>
 
       {/* Analytics Dashboard */}
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
         <div className="flex items-center gap-3 mb-4">
           <BarChart3 className="w-6 h-6 text-blue-400" />
-          <h3 className="text-lg md:text-xl font-bold">Analytics Dashboard</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            Analytics Dashboard
+          </h3>
         </div>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -352,9 +362,11 @@ function FeatureGuidesTab() {
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
         <div className="flex items-center gap-3 mb-4">
           <Wrench className="w-6 h-6 text-raptor-yellow" />
-          <h3 className="text-lg md:text-xl font-bold">Maintenance System</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            Maintenance System
+          </h3>
         </div>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -386,11 +398,11 @@ function FeatureGuidesTab() {
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
         <div className="flex items-center gap-3 mb-4">
           <SettingsIcon className="w-6 h-6 text-green-400" />
-          <h3 className="text-lg md:text-xl font-bold">
+          <h3 className="text-lg md:text-xl font-bold text-white">
             Settings & Administration
           </h3>
         </div>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -422,9 +434,11 @@ function FeatureGuidesTab() {
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
         <div className="flex items-center gap-3 mb-4">
           <ZapIcon className="w-6 h-6 text-purple-400" />
-          <h3 className="text-lg md:text-xl font-bold">AI Insights</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            AI Insights
+          </h3>
         </div>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>Review AI-generated anomaly detection and predictions</span>
@@ -492,7 +506,7 @@ function FAQsTab() {
 
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
         Frequently Asked Questions
       </h2>
 
@@ -506,7 +520,7 @@ function FAQsTab() {
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
               className="w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-raptor-lightgray transition-colors"
             >
-              <h3 className="text-base md:text-lg font-semibold pr-4">
+              <h3 className="text-base md:text-lg font-semibold pr-4 text-white">
                 {faq.question}
               </h3>
               {openIndex === index ? (
@@ -516,7 +530,7 @@ function FAQsTab() {
               )}
             </button>
             {openIndex === index && (
-              <div className="px-4 md:px-6 pb-4 md:pb-6 text-slate-300 text-sm md:text-base">
+              <div className="px-4 md:px-6 pb-4 md:pb-6 text-slate-200 text-sm md:text-base">
                 <p>{faq.answer}</p>
               </div>
             )}
@@ -532,7 +546,9 @@ function TroubleshootingTab() {
 
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">Troubleshooting Guide</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
+        Troubleshooting Guide
+      </h2>
 
       {/* Equipment Issues */}
       <div className="bg-raptor-gray rounded-lg overflow-hidden">
@@ -544,7 +560,9 @@ function TroubleshootingTab() {
         >
           <div className="flex items-center gap-3">
             <Wrench className="w-5 h-5 md:w-6 md:h-6 text-raptor-yellow" />
-            <h3 className="text-lg md:text-xl font-bold">Equipment Issues</h3>
+            <h3 className="text-lg md:text-xl font-bold text-white">
+              Equipment Issues
+            </h3>
           </div>
           {openSection === "equipment" ? (
             <ChevronUp className="w-5 h-5 text-slate-400" />
@@ -557,25 +575,25 @@ function TroubleshootingTab() {
           <div className="p-4 md:p-6 space-y-4 md:space-y-6">
             {/* Sweep Won't Start */}
             <div className="bg-slate-700 rounded-lg p-4 md:p-6">
-              <h4 className="text-base md:text-lg font-semibold mb-3">
+              <h4 className="text-base md:text-lg font-semibold mb-3 text-white">
                 {"Sweep Won't Start"}
               </h4>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   No motor response
                 </span>
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   Control panel shows error
                 </span>
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   Emergency stop engaged
                 </span>
               </div>
               <div className="mb-3">
-                <p className="font-semibold mb-2 text-sm md:text-base">
+                <p className="font-semibold mb-2 text-sm md:text-base text-white">
                   Solution Steps:
                 </p>
-                <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+                <ul className="space-y-2 text-slate-200 text-sm md:text-base">
                   <li className="flex items-start gap-2">
                     <span className="text-raptor-yellow mt-1">•</span>
                     <span>
@@ -620,25 +638,25 @@ function TroubleshootingTab() {
 
             {/* Sweep Moves Slowly */}
             <div className="bg-slate-700 rounded-lg p-4 md:p-6">
-              <h4 className="text-base md:text-lg font-semibold mb-3">
+              <h4 className="text-base md:text-lg font-semibold mb-3 text-white">
                 Sweep Moves Slowly or Inconsistantly
               </h4>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   Reduced speed
                 </span>
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   Jerky movement
                 </span>
-                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm">
+                <span className="px-2 md:px-3 py-1 bg-slate-600 rounded text-xs md:text-sm text-slate-200">
                   Frequent stops and starts
                 </span>
               </div>
               <div className="mb-3">
-                <p className="font-semibold mb-2 text-sm md:text-base">
+                <p className="font-semibold mb-2 text-sm md:text-base text-white">
                   Solution Steps:
                 </p>
-                <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+                <ul className="space-y-2 text-slate-200 text-sm md:text-base">
                   <li className="flex items-start gap-2">
                     <span className="text-raptor-yellow mt-1">•</span>
                     <span>Check motor load and amperage readings</span>
@@ -682,7 +700,7 @@ function TroubleshootingTab() {
         >
           <div className="flex items-center gap-3">
             <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
-            <h3 className="text-lg md:text-xl font-bold">
+            <h3 className="text-lg md:text-xl font-bold text-white">
               Sensors & Monitoring
             </h3>
           </div>
@@ -704,7 +722,9 @@ function TroubleshootingTab() {
         >
           <div className="flex items-center gap-3">
             <SettingsIcon className="w-5 h-5 md:w-6 md:h-6 text-green-400" />
-            <h3 className="text-lg md:text-xl font-bold">System & Software</h3>
+            <h3 className="text-lg md:text-xl font-bold text-white">
+              System & Software
+            </h3>
           </div>
           {openSection === "system" ? (
             <ChevronUp className="w-5 h-5 text-slate-400" />
@@ -722,7 +742,9 @@ function TroubleshootingTab() {
         >
           <div className="flex items-center gap-3">
             <ZapIcon className="w-5 h-5 md:w-6 md:h-6 text-purple-400" />
-            <h3 className="text-lg md:text-xl font-bold">AI & Predictions</h3>
+            <h3 className="text-lg md:text-xl font-bold text-white">
+              AI & Predictions
+            </h3>
           </div>
           {openSection === "ai" ? (
             <ChevronUp className="w-5 h-5 text-slate-400" />
@@ -737,25 +759,25 @@ function TroubleshootingTab() {
         <h3 className="text-lg md:text-xl font-bold text-red-400 mb-2">
           Still Need Help?
         </h3>
-        <p className="text-slate-300 mb-4 text-sm md:text-base">{`If these steps don't resolve your issues:`}</p>
+        <p className="text-slate-200 mb-4 text-sm md:text-base">{`If these steps don't resolve your issues:`}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p className="font-semibold mb-1 text-sm md:text-base">
+            <p className="font-semibold mb-1 text-sm md:text-base text-white">
               Technical Support
             </p>
-            <p className="text-sm text-slate-300 flex items-center gap-2">
+            <p className="text-sm text-slate-200 flex items-center gap-2">
               <Phone className="w-4 h-4" /> 1-800-RAPTOR-1
             </p>
-            <p className="text-sm text-slate-300">support@raptor-systems.com</p>
+            <p className="text-sm text-slate-200">support@raptor-systems.com</p>
           </div>
           <div>
             <p className="font-semibold mb-1 text-red-400 text-sm md:text-base">
               Emergency Line
             </p>
-            <p className="text-sm text-slate-300 flex items-center gap-2">
+            <p className="text-sm text-slate-200 flex items-center gap-2">
               <Phone className="w-4 h-4" /> 1-800-EMERGENCY
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300">
               For critical safety issues only
             </p>
           </div>
@@ -768,7 +790,9 @@ function TroubleshootingTab() {
 function SafetyTab() {
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">Safety Guidelines</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
+        Safety Guidelines
+      </h2>
 
       {/* Important Safety Notice */}
       <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-700/50 rounded-lg p-4 md:p-6">
@@ -778,7 +802,7 @@ function SafetyTab() {
             Important Safety Notice
           </h3>
         </div>
-        <p className="text-slate-300 text-sm md:text-base">
+        <p className="text-slate-200 text-sm md:text-base">
           Grain bin operations involve serious safety risks. Always follow
           proper safety procedures and contact qualified technicians for complex
           repairs or maintenance.
@@ -787,10 +811,10 @@ function SafetyTab() {
 
       {/* General Grain Bin Safety */}
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
-        <h3 className="text-lg md:text-xl font-bold mb-4">
+        <h3 className="text-lg md:text-xl font-bold mb-4 text-white">
           General Grain Bin Safety
         </h3>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -824,8 +848,10 @@ function SafetyTab() {
 
       {/* Electrical Safety */}
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
-        <h3 className="text-lg md:text-xl font-bold mb-4">Electrical Safety</h3>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <h3 className="text-lg md:text-xl font-bold mb-4 text-white">
+          Electrical Safety
+        </h3>
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>
@@ -855,10 +881,10 @@ function SafetyTab() {
 
       {/* When to Contact a Technician */}
       <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
-        <h3 className="text-lg md:text-xl font-bold mb-4">
+        <h3 className="text-lg md:text-xl font-bold mb-4 text-white">
           When to Contact a Technician
         </h3>
-        <ul className="space-y-2 text-slate-300 text-sm md:text-base">
+        <ul className="space-y-2 text-slate-200 text-sm md:text-base">
           <li className="flex items-start gap-2">
             <span className="text-raptor-yellow mt-1">•</span>
             <span>Any electrical issues beyond basic troubleshooting</span>
@@ -888,38 +914,46 @@ function SafetyTab() {
 function ContactTab() {
   return (
     <div className="space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-bold">Contact & Resources</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-white">
+        Contact & Resources
+      </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Technical Support */}
         <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
           <div className="flex items-center gap-3 mb-4 md:mb-6">
             <Phone className="w-6 h-6 text-green-400" />
-            <h3 className="text-lg md:text-xl font-bold">Technical Support</h3>
+            <h3 className="text-lg md:text-xl font-bold text-white">
+              Technical Support
+            </h3>
           </div>
           <div className="space-y-3 md:space-y-4 text-sm md:text-base">
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-slate-400 flex-shrink-0 mt-1" />
               <div>
-                <p className="font-semibold">1-800-RAPTOR-1</p>
+                <p className="font-semibold text-slate-200">1-800-RAPTOR-1</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Mail className="w-5 h-5 text-slate-400 flex-shrink-0 mt-1" />
               <div>
-                <p className="font-semibold">support@raptor-systems.com</p>
+                <p className="font-semibold text-slate-200">
+                  support@raptor-systems.com
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Clock className="w-5 h-5 text-slate-400 flex-shrink-0 mt-1" />
               <div>
-                <p className="font-semibold">24/7 Emergency Support</p>
+                <p className="font-semibold text-slate-200">
+                  24/7 Emergency Support
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Users className="w-5 h-5 text-slate-400 flex-shrink-0 mt-1" />
               <div>
-                <p className="font-semibold">
+                <p className="font-semibold text-slate-200">
                   Mon-Fri 8AM-6PM CST (General Support)
                 </p>
               </div>
@@ -931,18 +965,20 @@ function ContactTab() {
         <div className="bg-raptor-gray rounded-lg p-4 md:p-6">
           <div className="flex items-center gap-3 mb-4 md:mb-6">
             <Download className="w-6 h-6 text-blue-400" />
-            <h3 className="text-lg md:text-xl font-bold">Documentation</h3>
+            <h3 className="text-lg md:text-xl font-bold text-white">
+              Documentation
+            </h3>
           </div>
           <div className="space-y-3">
-            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base">
+            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base text-slate-200">
               <span>User Manual (PDF)</span>
               <Download className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base">
+            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base text-slate-200">
               <span>Installation Guide</span>
               <Download className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base">
+            <button className="w-full flex items-center justify-between p-3 md:p-4 bg-raptor-lightgray hover:bg-slate-600 rounded-lg transition-colors text-sm md:text-base text-slate-200">
               <span>Safety Manual</span>
               <Download className="w-4 h-4 md:w-5 md:h-5" />
             </button>
@@ -954,33 +990,37 @@ function ContactTab() {
       <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-700/50 rounded-lg p-4 md:p-6">
         <div className="flex items-center gap-3 mb-4 md:mb-6">
           <AlertTriangle className="w-6 h-6 text-red-400" />
-          <h3 className="text-lg md:text-xl font-bold">Emergency Contacts</h3>
+          <h3 className="text-lg md:text-xl font-bold text-white">
+            Emergency Contacts
+          </h3>
         </div>
 
         <div className="bg-red-900/40 border border-red-600/50 rounded-lg p-4 mb-4">
           <p className="font-bold text-red-400 mb-2 text-sm md:text-base">
             24/7 Emergency Line
           </p>
-          <p className="text-lg md:text-xl font-bold mb-1">1-800-EMERGENCY</p>
-          <p className="text-xs md:text-sm text-slate-400">
+          <p className="text-lg md:text-xl font-bold mb-1 text-white">
+            1-800-EMERGENCY
+          </p>
+          <p className="text-xs md:text-sm text-slate-300">
             For critical system failures or safety emergencies
           </p>
         </div>
 
         <div className="space-y-3 text-sm md:text-base">
           <div>
-            <p className="font-semibold">Local Technicians:</p>
-            <p className="text-slate-300">
+            <p className="font-semibold text-white">Local Technicians:</p>
+            <p className="text-slate-200">
               Contact your regional service center
             </p>
           </div>
           <div>
-            <p className="font-semibold">Parts & Service:</p>
-            <p className="text-slate-300">parts@raptor-systems@gmail.com</p>
+            <p className="font-semibold text-white">Parts & Service:</p>
+            <p className="text-slate-200">parts@raptor-systems@gmail.com</p>
           </div>
           <div>
-            <p className="font-semibold">Warranty Claims:</p>
-            <p className="text-slate-300">warranty@raptor-systems@gmail.com</p>
+            <p className="font-semibold text-white">Warranty Claims:</p>
+            <p className="text-slate-200">warranty@raptor-systems@gmail.com</p>
           </div>
         </div>
       </div>
